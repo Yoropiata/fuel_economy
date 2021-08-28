@@ -1,0 +1,30 @@
+{
+    "helloWorld": "Hello World!",
+    "@helloWorld": {
+      "description": "The conventional newborn programmer greeting"
+    },
+    "myNameIs": "My name is",
+    "@myNameIs": {
+      "description": "Presentation of a person"
+    },
+    "createFuelRegistration": "Create Fuel Registration",
+    "@createFuelRegistration": {
+      "description": "Title for create fuel registration page"
+    },
+    "vin": "VIN",
+    "@vin": {
+      "description": "word: VIN"
+    },
+    "vinOptional": "VIN (Optional)",
+    "@vinOptional": {
+      "description": "word: VIN when it's optional"
+    },
+    "licensePlate": "License plate",
+    "@licensePlate": {
+      "description": "word: license plate"
+    },
+    "licensePlateOptional": "License plate (Optional)",
+    "@licensePlateOptional": {
+      "description": "word: license plate when it's optional"
+    }
+}
