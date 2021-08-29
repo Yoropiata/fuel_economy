@@ -6,5 +6,5 @@ The platform is built on Flutter, with the intention to test out new and excitin
 
 Among those is: 
 
-![Flutter Hive](https://raw.githubusercontent.com/hivedb/hive/master/.github/logo_transparent.svg?sanitize=true)
-![Lokalise](https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true)
+<img src="https://raw.githubusercontent.com/hivedb/hive/master/.github/logo_transparent.svg?sanitize=true" alt="Flutter Hive" width="200"/>
+<img src="https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true" alt="Lokalise" width="200"/>
