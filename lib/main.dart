@@ -24,6 +24,7 @@ void main() async {
 class FuelEconomyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Car? selectedCar = CarRepository().getSelectedCar();
     return MaterialApp(
       title: 'Fuel economy app',
       theme: ThemeData(
@@ -31,7 +32,9 @@ class FuelEconomyApp extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      initialRoute: CarDetailPage.ROUTE,
+      initialRoute: selectedCar != null 
+        ? CarDetailPage.ROUTE 
+        : CarCreatePage.ROUTE,
       routes: <String, Widget Function(BuildContext)> {
         CarCreatePage.ROUTE: (ctx) => CarCreatePage(),
         CarDetailPage.ROUTE: (ctx) => CarDetailPage(),

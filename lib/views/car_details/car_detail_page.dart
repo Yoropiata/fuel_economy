@@ -20,6 +20,8 @@ class CarDetailPage extends StatefulWidget {
 
 class _CarDetailPageState extends State<CarDetailPage> {
   CarRepository repo = CarRepository();
+
+  int selectedIndex = 0;
   late Car car;
   late Widget selectedWidget;
 
@@ -27,12 +29,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
 
   @override
   void initState() {
-    
-    Car? nullableCar = CarRepository().getSelectedCar();
-    if(nullableCar == null) {
-      Navigator.pushReplacementNamed(context, CarCreatePage.ROUTE);
-    }
-    car = nullableCar!;
+    car = CarRepository().getSelectedCar()!;
     
     widgets = [
       CarDashboard(car: car),
@@ -50,7 +47,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
       CarDashboard(car: car),
       FuelRegistrationPage(car: car),
     ];
-
+    selectedWidget = widgets[selectedIndex];
 
     return Scaffold(
       appBar: AppBar(title: Text("Car Detail Page")),
@@ -67,14 +64,15 @@ class _CarDetailPageState extends State<CarDetailPage> {
   void updateCar(Car car) {
     setState(() {
       CarRepository().setSelectedCar(car);
+      // selectedIndex = 0;
       this.car = car;
-      Navigator.pushReplacementNamed(context, CarDetailPage.ROUTE);
+      // Navigator.pushReplacementNamed(context, CarDetailPage.ROUTE);
     });
   }
 
   void updatePage(int i) {
     setState(() {
-      selectedWidget = widgets[i];
+      selectedIndex = i;
     });
   }
 }
