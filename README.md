@@ -1,16 +1,10 @@
-# fuel_economy
+# Fuel Economy
 
-A new Flutter project.
+Fuel Economy is a manager / dashboard to keep track of your combustion engines economy, this allows you to track whenever you've refueled and get statistics.
 
-## Getting Started
+The platform is built on Flutter, with the intention to test out new and exciting technology.
 
-This project is a starting point for a Flutter application.
+Among those is: 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Flutter Hive](https://raw.githubusercontent.com/hivedb/hive/master/.github/logo_transparent.svg?sanitize=true)
+![Lokalise](https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true)
