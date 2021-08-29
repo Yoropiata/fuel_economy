@@ -6,6 +6,9 @@ The platform is built on Flutter, with the intention to test out new and excitin
 
 Among those is:
 
-<img src="https://raw.githubusercontent.com/hivedb/hive/master/.github/logo_transparent.svg?sanitize=true" alt="Flutter Hive" width="200" align="center" />
-
-<img src="https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true" alt="Lokalise" width="450" align="center" />
+<a href="https://docs.hivedb.dev/">
+  <img src="https://raw.githubusercontent.com/hivedb/hive/master/.github/logo_transparent.svg?sanitize=true" alt="Flutter Hive" width="200" align="center" />
+</a>
+<a href="https://lokalise.com/">
+  <img src="https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true" alt="Flutter Hive" width="200" align="center" />
+</a>
