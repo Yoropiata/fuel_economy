@@ -11,5 +11,5 @@ Among those is:
 </a>
 
 <a href="https://lokalise.com/">
-  <img src="https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true" alt="Flutter Hive" width="200" align="center" />
+  <img src="https://github.com/lokalise/i18n-ally/raw/screenshots/lokalise-logo.png?raw=true" alt="Flutter Hive" width="450" align="center" />
 </a>
