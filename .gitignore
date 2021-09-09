@@ -49,3 +49,4 @@ app.*.map.json
 
 # build key file
 key.properties
+google-services.json

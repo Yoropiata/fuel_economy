@@ -1,4 +1,8 @@
 
+import 'dart:async';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fuel_economy/models/models.dart';
@@ -12,16 +16,27 @@ import 'package:fuel_economy/views/cars/car_create_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    await Firebase.initializeApp();
+    
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+
+    // FirebaseCrashlytics.instance.crash();
+
+    await Hive.initFlutter();
+    Hive.registerAdapter(FuelRegistrationAdapter());
+    Hive.registerAdapter(CarAdapter());
+    await CarRepository.initialize();
+    await FuelRegistrationRepository.initialize();
+    await SettingsRepository.initialize();
+    
+    runApp(FuelEconomyApp());
+  }, (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack));
   
-  await Hive.initFlutter();
-  Hive.registerAdapter(FuelRegistrationAdapter());
-  Hive.registerAdapter(CarAdapter());
-  await CarRepository.initialize();
-  await FuelRegistrationRepository.initialize();
-  await SettingsRepository.initialize();
-  
-  runApp(FuelEconomyApp());
 }
 
 class FuelEconomyApp extends StatelessWidget {

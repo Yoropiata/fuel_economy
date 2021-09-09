@@ -25,6 +25,9 @@ dependencies:
   build_runner: ^2.1.1
   flutter_datetime_picker: ^1.5.1
   flutter_launcher_icons: ^0.9.1
+  firebase_core: "^1.6.0"
+  firebase_crashlytics: ^2.2.1
+
 
 dev_dependencies:
   flutter_test:
