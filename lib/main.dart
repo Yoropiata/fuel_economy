@@ -25,8 +25,6 @@ void main() async {
 
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 
-    // FirebaseCrashlytics.instance.crash();
-
     await Hive.initFlutter();
     Hive.registerAdapter(FuelRegistrationAdapter());
     Hive.registerAdapter(CarAdapter());

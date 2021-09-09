@@ -27,7 +27,8 @@ dependencies:
   flutter_launcher_icons: ^0.9.1
   firebase_core: "^1.6.0"
   firebase_crashlytics: ^2.2.1
-
+  firebase_performance: "^0.7.1"
+  firebase_analytics: "^8.3.2"
 
 dev_dependencies:
   flutter_test:
