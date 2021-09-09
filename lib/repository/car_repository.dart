@@ -11,25 +11,10 @@ class CarRepository {
     await Hive.openBox<Car>(_boxCars);
     await Hive.openBox<String>(_boxSettings);
   }
-
-  Car? getSelectedCar() {
-    try {
-      String carId = Hive.box<String>(_boxSettings).get(_selectedCar) ?? getCars().first.id;
-      return getCar(carId);
-    } catch (StateError) {
-      return null;
-    }
-  }
-  Future<void> setSelectedCar(Car car) {
-    return Hive.box<String>(_boxSettings).put(_selectedCar, car.id);
-  }
-
+  
   List<Car> getCars() {
     var box = Hive.box<Car>(_boxCars);
-    var cars = box
-        .values
-        .map((e) => e as Car)
-        .toList();
+    var cars = box.values.toList();
     return cars;
   }
 

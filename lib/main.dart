@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fuel_economy/models/models.dart';
 import 'package:fuel_economy/repository/car_repository.dart';
+import 'package:fuel_economy/repository/fuel_registration_repository.dart';
+import 'package:fuel_economy/repository/settings_repository.dart';
 import 'package:fuel_economy/views/car_details/car_detail_page.dart';
 import 'package:fuel_economy/views/car_details/fuel_registration/fuel_registration_create_page.dart';
 import 'package:fuel_economy/views/car_details/fuel_registration/fuel_registration_edit_page.dart';
@@ -17,6 +18,8 @@ void main() async {
   Hive.registerAdapter(FuelRegistrationAdapter());
   Hive.registerAdapter(CarAdapter());
   await CarRepository.initialize();
+  await FuelRegistrationRepository.initialize();
+  await SettingsRepository.initialize();
   
   runApp(FuelEconomyApp());
 }
@@ -24,7 +27,7 @@ void main() async {
 class FuelEconomyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Car? selectedCar = CarRepository().getSelectedCar();
+    Car? selectedCar = SettingsRepository().getSelectedCar();
     return MaterialApp(
       title: 'Fuel economy app',
       theme: ThemeData(

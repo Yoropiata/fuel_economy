@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
-import 'models.dart';
-
 part 'fuel_registration.g.dart';
 
 @HiveType(typeId: 0)

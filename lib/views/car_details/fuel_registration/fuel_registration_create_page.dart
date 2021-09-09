@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:fuel_economy/models/models.dart';
 import 'package:fuel_economy/repository/car_repository.dart';
+import 'package:fuel_economy/repository/settings_repository.dart';
+import 'package:fuel_economy/views/car_details/car_detail_page.dart';
 import 'package:fuel_economy/views/car_details/fuel_registration/fuel_registration_editor.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
@@ -22,8 +24,11 @@ class FuelRegistrationCreatePage extends StatelessWidget {
             padding: EdgeInsets.all(16.0),
             child: FuelRegistrationEditor(
               onSubmit: (fr) {
-                CarRepository().getSelectedCar()!.fuelRegistrations.add(fr);
-                Navigator.pop(context);
+                Car car = SettingsRepository().getSelectedCar()!;
+                car.fuelRegistrations.add(fr);
+                CarRepository().putCar(car);
+
+                Navigator.pushReplacementNamed(context, CarDetailPage.ROUTE);
               },
             ),
           ),

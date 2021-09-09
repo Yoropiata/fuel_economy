@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fuel_economy/bloc/cubit/car_cubit.dart';
 import 'package:fuel_economy/models/models.dart';
 import 'package:fuel_economy/repository/car_repository.dart';
+import 'package:fuel_economy/repository/settings_repository.dart';
 import 'package:fuel_economy/views/car_details/car_dashboard_page.dart';
 import 'package:fuel_economy/views/car_details/fuel_registration/fuel_registration_create_page.dart';
 import 'package:fuel_economy/views/car_details/fuel_registration/fuel_registration_page.dart';
@@ -29,7 +30,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
 
   @override
   void initState() {
-    car = CarRepository().getSelectedCar()!;
+    car = SettingsRepository().getSelectedCar()!;
     
     widgets = [
       CarDashboard(car: car),
@@ -42,7 +43,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    car = CarRepository().getSelectedCar()!;
+    car = SettingsRepository().getSelectedCar()!;
     widgets = [
       CarDashboard(car: car),
       FuelRegistrationPage(car: car),
@@ -63,7 +64,7 @@ class _CarDetailPageState extends State<CarDetailPage> {
 
   void updateCar(Car car) {
     setState(() {
-      CarRepository().setSelectedCar(car);
+      SettingsRepository().setSelectedCar(car);
       // selectedIndex = 0;
       this.car = car;
       // Navigator.pushReplacementNamed(context, CarDetailPage.ROUTE);

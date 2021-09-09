@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fuel_economy/repository/car_repository.dart';
+import 'package:fuel_economy/repository/settings_repository.dart';
 import 'package:fuel_economy/views/car_details/car_detail_page.dart';
 import 'package:fuel_economy/views/cars/car_editor.dart';
 
@@ -20,7 +21,7 @@ class CarCreatePage extends StatelessWidget {
             child: CarEditor(
               onSubmit: (c) {
                 CarRepository().putCar(c);
-                CarRepository().setSelectedCar(c);
+                SettingsRepository().setSelectedCar(c);
                 Navigator.pushReplacementNamed(context, CarDetailPage.ROUTE);
               },
             ),
