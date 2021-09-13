@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:fuel_economy/enums/fueling_states.dart';
 import 'package:fuel_economy/helpers/decimal_text_input_formatter.dart';
 import 'package:fuel_economy/models/models.dart';
+import 'package:intl/intl.dart';
 
 class FuelRegistrationEditor extends StatefulWidget {
 
@@ -21,6 +23,9 @@ class FuelRegistrationEditor extends StatefulWidget {
 }
 
 class _FuelRegistrationEditorState extends State<FuelRegistrationEditor> {
+
+  FuelingStates? lastEdited;
+  FuelingStates? currentlyEditing;
 
   TextEditingController currentKmStateController = TextEditingController(text: "");
   bool didRecordLastFuelStop = true;
@@ -53,12 +58,6 @@ class _FuelRegistrationEditorState extends State<FuelRegistrationEditor> {
     return Column(
       children: [
         TextField(
-          controller: litresController,
-          decoration: InputDecoration(labelText: "Litres"),
-          keyboardType: TextInputType.number,
-          inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
-        ),
-        TextField(
           controller: currentKmStateController,
           decoration: InputDecoration(labelText: "Total km"),
           keyboardType: TextInputType.number,
@@ -66,17 +65,47 @@ class _FuelRegistrationEditorState extends State<FuelRegistrationEditor> {
             FilteringTextInputFormatter.digitsOnly
           ]
         ),
-        TextField(
-          controller: pricePerLitreController,
-          decoration: InputDecoration(labelText: "Price per litre"),
-          keyboardType: TextInputType.number,
-          inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+        Row(
+          children: [
+            Flexible(
+              child: TextField(
+                controller: litresController,
+                onChanged: (val) => _onFieldChanged(FuelingStates.Litres, double.parse(val)),
+                decoration: InputDecoration(labelText: "Litres"),
+                keyboardType: TextInputType.number,
+                inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+              ),
+            ),
+            Flexible(
+              child: TextField(
+                controller: pricePerLitreController,
+                onChanged: (val) => _onFieldChanged(FuelingStates.PricePerLitre, double.parse(val)),
+                decoration: InputDecoration(labelText: "Price per litre"),
+                keyboardType: TextInputType.number,
+                inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+              ),
+            ),
+          ],
         ),
         TextField(
           controller: totalPriceController,
+                onChanged: (val) => _onFieldChanged(FuelingStates.TotalPrice, double.parse(val)),
           decoration: InputDecoration(labelText: "Total price"),
           keyboardType: TextInputType.number,
           inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+        ),
+        TextButton(
+          child: Text(DateFormat('dd-MM-yyyy - HH:mm').format(time.toLocal())),
+          onPressed: () {
+            DatePicker.showDateTimePicker(context,
+              showTitleActions: true,
+              onConfirm: (date) {
+                setState(() {
+                  time = date;
+                });
+              }, 
+              currentTime: time, locale: LocaleType.da);
+          }
         ),
         SwitchListTile(
           title: Text("Last fuelstop recorded."),
@@ -98,17 +127,6 @@ class _FuelRegistrationEditorState extends State<FuelRegistrationEditor> {
             });
           },
         ),
-        TextButton(
-          child: Text("Time recorded"),
-          onPressed: () {
-            DatePicker.showDateTimePicker(context,
-              showTitleActions: true,
-              onConfirm: (date) {
-                time = date;
-              }, 
-              currentTime: time, locale: LocaleType.da);
-          }
-        ),
         ElevatedButton(
           onPressed: onSubmit, 
           child: Text("Submit")
@@ -127,5 +145,40 @@ class _FuelRegistrationEditorState extends State<FuelRegistrationEditor> {
       ..didFillTank = didFillTank;
     
     widget.onSubmit(widget.fuelRegistration!);
+  }
+
+  void _onFieldChanged(FuelingStates state, double value) {
+    if(currentlyEditing != state) {
+      lastEdited = currentlyEditing;
+      currentlyEditing = state;
+    }
+    if(lastEdited == null) {
+      return;
+    }
+
+    var totalPrice = double.tryParse(totalPriceController.text);
+    var litres = double.tryParse(litresController.text);
+    var pricePerLitre = double.tryParse(pricePerLitreController.text);
+
+
+    if(
+      (lastEdited == FuelingStates.Litres && currentlyEditing == FuelingStates.PricePerLitre) || 
+      (lastEdited == FuelingStates.PricePerLitre && currentlyEditing == FuelingStates.Litres) 
+    ) {
+      // totalPrice when Litres && PricePerLitre
+      totalPriceController.text = (litres! * pricePerLitre!).toString();
+    } else if(
+      (lastEdited == FuelingStates.TotalPrice && currentlyEditing == FuelingStates.Litres) ||
+      (lastEdited == FuelingStates.Litres && currentlyEditing == FuelingStates.TotalPrice)
+    ) {
+      // pricePerLitre when TotalPrice && Litres
+      pricePerLitreController.text = (totalPrice! / litres!).toString();
+    } else if(
+      (lastEdited == FuelingStates.TotalPrice && currentlyEditing == FuelingStates.PricePerLitre) ||
+      (lastEdited == FuelingStates.PricePerLitre && currentlyEditing == FuelingStates.TotalPrice)
+    ) {
+      // litres when TotalPrice && PricePerLitre
+      litresController.text = (totalPrice! / pricePerLitre!).toString();
+    }
   }
 }
