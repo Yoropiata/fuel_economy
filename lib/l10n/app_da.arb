@@ -1,5 +1,9 @@
 {
     "helloWorld": "Hej verden!",
     "myNameIs": "Mit navn er",
-    "createFuelRegistration": "Create Fuel Registration"
+    "createFuelRegistration": "Opret brændstofregistrering",
+    "vin": "VIN",
+    "vinOptional": "VIN (Valgfrit)",
+    "licensePlate": "Nummerplade",
+    "licensePlateOptional": "Nummerplade (Valgfrit)"
 }
