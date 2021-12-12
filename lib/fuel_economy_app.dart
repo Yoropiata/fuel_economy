@@ -36,9 +36,9 @@ class FuelEconomyApp extends StatelessWidget {
     );
   }
 
-  /**
-   * Compute the initial route based off of whether a 
-   */
+  /// Returns the initial route to be displayed. 
+  /// If there is a selected car, then the car detail page is displayed. Otherwise, the car create page is displayed. 
+  /// If there is no selected car, then the car create page is displayed.
   String _getInitialRoute() {
     return SettingsRepository().getSelectedCar() != null
       ? CarDetailPage.ROUTE

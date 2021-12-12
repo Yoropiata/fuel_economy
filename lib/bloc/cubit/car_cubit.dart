@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:fuel_economy/models/models.dart';
 import 'package:fuel_economy/repository/car_repository.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:meta/meta.dart';
 
 part 'car_state.dart';

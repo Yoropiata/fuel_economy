@@ -1,5 +1,6 @@
 
 import 'package:fuel_economy/models/models.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 
 class FuelRegistrationRepository {
@@ -25,6 +26,7 @@ class FuelRegistrationRepository {
 
   Future<void> putFuelRegistration(FuelRegistration fuelRegistration) {
     return Hive.box<FuelRegistration>(_boxFuelRegistration).put(fuelRegistration.id, fuelRegistration);
+
   }
 
   Future<void> removeFuelRegistration(FuelRegistration fuelRegistration) {

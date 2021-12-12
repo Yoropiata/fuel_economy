@@ -18,7 +18,7 @@ class AuthGate extends StatelessWidget {
             home: SignInScreen(providerConfigs: [
               EmailProviderConfiguration(),
               GoogleProviderConfiguration(
-                clientId: 'fuel-economy-994a7.firebaseapp.com',
+                clientId: '352752296887-l2lr33d71horaf9uet5ihbn2jra5kheq.apps.googleusercontent.com',
               ),
             ]),
           );

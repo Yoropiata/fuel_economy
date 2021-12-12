@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ import 'package:fuel_economy/models/models.dart';
 import 'package:fuel_economy/repository/car_repository.dart';
 import 'package:fuel_economy/repository/fuel_registration_repository.dart';
 import 'package:fuel_economy/repository/settings_repository.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
@@ -28,8 +30,6 @@ void _startApp() async {
   // token is: F488C3CB-CC85-44CF-B3D5-5AD1174744D4
   await FirebaseAppCheck.instance.activate();
   await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
-
-
 
   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
 
