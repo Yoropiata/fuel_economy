@@ -13,6 +13,7 @@ Function(Car) onCarSelected;
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Theme.of(context).secondaryHeaderColor,
       child: Column(
         children: <Widget>[
           Flexible(
